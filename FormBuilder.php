@@ -26,33 +26,13 @@ class FormBuilder
         return $this;
     }
 
-    public function select($name , $id , $options , $label)
+    public function select()
     {
 
-        if($id != ''  && $label != ''){
-            $this->form .= "<label for='$id'>$label</label>";
-        }
-        $this->form .= "<select id='$id' name='$name'>";
-        $this->form .= "<option>-----</option>";
-        foreach ($options as $key => $option) {
-            $this->form .= "<option value='$key'>$option</option>";
-        }
-
-
-        $this->form.="</select><br>";
-
-        return $this;
     }
 
-    public  function  textarea($name, $id, $rows , $cols)
+    public function texarea()
     {
-        if($id != ''  && $label != ''){
-            $this->form .= "<label for='$id'>$label</label>";
-        }
-        $this->form .="<textarea id='$id' name='$name' rows='4' cols ='50'>";
-        
-        $this->form .="</textarea><br>";
-        return $this;
-    }
 
+    }
 }

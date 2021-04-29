@@ -1,13 +1,14 @@
 <?php
 
-//include_once 'UrlHelper.php';
-//include_once 'FormBuilder.php';
+include_once 'UrlHelper.php';
+include_once 'FormBuilder.php';
+include_once 'SqlBuilder.php';
 //$urlHelper = new UrlHelper();
-////echo '<pre>';
-////var_dump($urlHelper);
-////$urlHelper->port;
-//
-//$menuItems = ['about-us', 'contacts', 'blog', 'shop'];
+//echo '<pre>';
+//var_dump($urlHelper);
+//$urlHelper->port;
+
+$menuItems = ['about-us', 'contacts', 'blog', 'shop'];
 //
 //foreach ($menuItems as $item) {
 //    $urlHelper->buildUrl($item);
@@ -25,42 +26,30 @@
 //    echo '</div>';
 //}
 //echo '------------------------';
-//$cars = [
-//    1 => "volvo",
-//    2 => "VW",
-//    3 => "BMW"
-//];
 //$form = new FormBuilder('post', 'index.php');
-//$form->input('name', 'text', '', 'Name', '', '', '')
-//    ->input('email', 'text', '', 'Email', '', '', '')
-//    ->input('password', 'password', '', '*********', '', '', '')
-//    ->select('name', 'cars', $cars, 'Cars')
-//    ->textarea('name', '', '4', 50);
+//$form->input('name', 'text', '', 'Name')
+//    ->input('email', 'text', '', 'Email')
+//    ->input('password', 'password', '', '*********');
 //echo $form->get();
 
 
-include_once 'SqlBuilder.php';
-
 
 $db = new SqlBuilder();
-$db ->select('id' , 'name')->from('products')->where('id','4');
+$db->select('id, name')->from('products')->where('id',4);
 $db2 = new SqlBuilder();
-$db2->delete()->from('products')->where('id' , '5');
+//$db2->select()->from('user')->where('id', 1);
+$db->insert('user')->values([
+    'name'=> 'arnoldas',
+    'email' => 'email@email.com',
+    'password' => 'admin123'
+]);
+$db->exec();
+$db->update('user')->set(['password'=>'admin12312'])->where('id',3);
+$db->exec();
+//$db->delete()->from('user')->where('id',1);
+//$db->exec();
+//$db->update()->exec(); //pilna
+//$db->delete()->exec(); //pilna
+//print_r($db2->get());
 
-$db3 = new SqlBuilder();
 
-$values = [
-    'name' => 'Batai',
-    'sku' => '123',
-    'price' => '12',
-    'cost' => 4
-];
-
-$db3->update('products' )->set($values)->where('id',5);
-
-
-
-$db4 = new SqlBuilder();
-
-$db4 ->insert('products')->values($values);
-echo $db4->getSql();
